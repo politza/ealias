@@ -32,11 +32,11 @@
    the /ealias/ command.  They are listed in the following table and
    further described below.
 
-   | Variable      | Default          | Description                              |
-   |---------------+------------------+------------------------------------------|
-   | EALIAS_RC     | ~/.config/ealias | Filename to use for the -w/-r/-e options |
-   | EALIAS_CLIENT | emacsclient      | Program to use as emacsclient            |
-   |---------------+------------------+------------------------------------------|
+   | Variable      | Default            | Description                              |
+   |---------------+--------------------+------------------------------------------|
+   | EALIAS_RC     | ~/.config/ealiasrc | Filename to use for the -w/-r/-e options |
+   | EALIAS_CLIENT | emacsclient        | Program to use as emacsclient            |
+   |---------------+--------------------+------------------------------------------|
 
    For convenience the /ealias/ options /-w/, /-r/ and /-e/ let you
    write, resp. read, resp. edit the file EALIAS_RC .  This is just an
