@@ -72,9 +72,9 @@
 #+BEGIN_SRC sh
   $ ealias ediff='diff %^ %^ %*'
 #+END_SRC
-  The ~%^~ pops a argument and wraps it, like all ~%~-constructs, in
-  double-quotes, thereby transforming the shell word into a Lisp
-  string.
+  The ~%^~ code pops an argument and wraps it, like all
+  ~%~-constructs, in double-quotes, thereby transforming the shell
+  word into a Lisp string.
 #+BEGIN_SRC sh
   $ ediff -n file1 file2 -w -c
   emacsclient --eval (diff "file1" "file2" "-w -c")
