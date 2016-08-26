@@ -1,0 +1,94 @@
+#+TITLE:     ealias README
+#+AUTHOR:    Andreas Politz
+#+EMAIL:     politza@fh-trier.de
+
+* Description
+
+  The ealias command is in effect a wrapper around emacsclient for the
+  Bash shell.  It's a simple way of defining a shell function, which
+  will in turn call a specific Emacs function with a number of given
+  arguments.  It gives a little bit of eshell feeling and is
+  especially useful for mapping terminal-loving commands like /man/ to
+  their Emacs equivalents when using an M-x shell.
+
+* Installation
+
+  Somehow download the file /ealias/ in some directory and source it
+  either from your ~/.bashrc, for access in any shell, or your
+  ~/.emacs_bash, if you prefer it only being active in the M-x shell.
+
+* Usage
+  
+  After proper installation you should have access to a new command
+  called /ealias/.  See the output of
+#+BEGIN_SRC sh
+  $ ealias --help
+#+END_SRC
+  for a complete description and the [[Examples]] section below.
+
+** Environment Variables
+
+   There are a couple of variables which influence the behavior of
+   the /ealias/ command.  They are listed in the following table and
+   further described below.
+
+   | Variable      | Default          | Description                              |
+   |---------------+------------------+------------------------------------------|
+   | EALIAS_RC     | ~/.config/ealias | Filename to use for the -w/-r/-e options |
+   | EALIAS_CLIENT | emacsclient      | Program to use as emacsclient            |
+   |---------------+------------------+------------------------------------------|
+
+   For convenience the /ealias/ options /-w/, /-r/ and /-e/ let you
+   write, resp. read, resp. edit the file EALIAS_RC .  This is just an
+   easy way to write your possibly interactively defined aliases to a
+   file and read them back in later.
+
+* Examples
+
+  A /ealias/ definition looks pretty much like a normal alias, except
+  it
+  + may contain a number of special format codes and
+  + it is called much like a function, i.e. it accepts parameter.
+    
+  Let's start with a simple example and redefine the /man/ command,
+  which is pretty useless in an M-x shell.
+#+BEGIN_SRC sh
+  $ ealias man='man %*'
+#+END_SRC  
+
+  The /%*/ construct takes the remaining arguments (in this case all)
+  and concatenates them into a single string.  We can examine what
+  would be executed with the /-n/ option.
+#+BEGIN_SRC sh
+  $ man -n 3 printf
+  emacsclient --eval (man "3 printf")
+  $ man -n 3 printf
+  #<buffer *Man 3 printf*>
+#+END_SRC
+  
+  The next alias utilizes the /diff/ command, which takes 3 arguments,
+  namely the 2 files to find the differences for and which options to
+  use.
+#+BEGIN_SRC sh
+  $ ealias ediff='diff %^ %^ %*'
+#+END_SRC
+  The /%^/ pops a argument and wraps it, like all /%/-constructs, in
+  double-quotes, thereby transforming the shell word into a Lisp
+  string.
+#+BEGIN_SRC sh
+  $ ediff -n file1 file2 -w -c
+  emacsclient --eval (diff "file1" "file2" "-w -c")
+#+END_SRC  
+  The last example finds a file and edits it as the root user.
+#+BEGIN_SRC sh
+  $ ealias redit='find-file-other-window \"/sudo::$(readlink -f "$1")\"'
+#+END_SRC
+  Note, that this alias uses regular parameters only.  Since the whole
+  expression is evaluated, we need to escape the quotes.  
+#+BEGIN_SRC sh
+  $ redit -n /etc/bashrc
+  emacsclient --eval (find-file-other-window "/sudo::/etc/bashrc")
+#+END_SRC
+  See the file /ealiasrc.example/ for more examples.
+   
+

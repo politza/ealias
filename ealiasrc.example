@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ealias rgrep='rgrep %^ %* \"$PWD\"'
+ealias lgrep='grep \"grep --color -nH -e $*\"'
+ealias eman='man %*'
+ealias woman='woman %1'
+ealias ediff='diff %^ %^ %*'
+ealias eediff='ediff %1 %2'
+ealias vcdir='vc-dir \"${1:-$PWD}\"'
+ealias gnus='gnus-other-frame'
+ealias dired='dired-other-window \"${1:-$PWD}\"'
+ealias sdired='dired-other-window \"/sudo::$(readlink -f "${1:-$PWD}")\"'
+ealias ff='find-file-other-window %* t'
+ealias sff='find-file-other-window \"/sudo::$(readlink -f "$1")\"'
+ealias find-dired='find-dired %^ %*'
+
+complete -d dired
+complete -d sdired
+complete -d vcdir
+
