@@ -39,9 +39,9 @@
    |---------------+--------------------+------------------------------------------|
 
    For convenience the ~ealias~ options ~-w~, ~-r~ and ~-e~ let you
-   write, resp. read, resp. edit the file EALIAS_RC .  This is just an
-   easy way to write your possibly interactively defined aliases to a
-   file and read them back in later.
+   write, resp. read, resp. edit the file ~EALIAS_RC~ .  This is just
+   an easy way to write your possibly interactively defined aliases to
+   a file and read them back in later.
 
 * Examples
 
